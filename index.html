@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walentynki</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet"> <!-- Dodanie czcionki -->
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: rgb(255, 208, 229);
+            background: linear-gradient(180deg, rgba(255, 208, 229, 1) 0%, rgba(255, 232, 242, 1) 36%, rgba(255, 255, 255, 1) 100%);
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #header {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            color: #ff6f61;
+            text-shadow: 2px 2px #f0a1a8;
+            margin-bottom: 30px;
+        }
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        #valentineQuestion {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #bd1e59;
+        }
+        #responseButtons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            position: relative;
+            width: 100%;
+            justify-content: space-between;
+        }
+        button {
+            padding: 12px 24px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            box-shadow: 0 0 10px rgba(255, 105, 135, 0.8);
+            transform: scale(1.1);
+        }
+        #yesButton {
+            background-color: #4caf50;
+            color: white;
+        }
+        #noButton {
+            background-color: #f44336;
+            color: white;
+        }
+        img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-top: 20px;
+            max-height: 350px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1 id="header">Walentynkowa Kruszynka</h1> <!-- Tytuł -->
+        <div id="valentineQuestion">Czy zostaniesz moją walentynką?</div>
+        <div id="responseButtons">
+            <button id="yesButton">Tak</button>
+            <button id="noButton">Nie</button>
+        </div>
+        <img id="imageDisplay" src="./images/image1.gif" alt="Obrazek" style="display:block;">
+    </div>
+
+    <script>
+        const yesButton = document.getElementById('yesButton');
+        const noButton = document.getElementById('noButton');
+        const imageDisplay = document.getElementById('imageDisplay');
+        const valentineQuestion = document.getElementById('valentineQuestion');
+        const responseButtons = document.getElementById('responseButtons');
+
+        let noClickCount = 0;
+        let buttonHeight = 48;
+        let buttonWidth = 80;
+        let fontSize = 20;
+        let imageWidth = 300;
+        let imageHeight = 300;
+
+        const imagePaths = [
+            "./images/image2.gif",
+            "./images/image3.gif",
+            "./images/image4.gif",
+            "./images/image5.gif",
+            "./images/image6.gif"
+        ];
+
+        const noResponses = [
+            "Nie 😭",
+            "Na pewno? 🥺",
+            "Proszę kruszynko 😢",
+            "Nie rób mi tego 😭",
+            "Łamiesz mi serce 💔",
+            "Zaraz się popłaczę... 😭",
+            "Przemyśl jeszcze raz 🥺",
+            "Zrób to dla mnie 🙃",
+            "Pomyśl o mnie 🥹",
+            "Jesteś pewna? 😧",
+            "Nie odmawiaj 😣",
+            "Tak się nie robi 🥴",
+            "Zlituj się nade mną 😭",
+            "Nie masz serca 😢",
+            "Prawda, że możesz? 🥹",
+            "Proszę, jak nigdy 😖",
+            "Tak bardzo chcę 😭",
+            "Błagam 🥺",
+            "Nie wytrzymam! 🫠",
+            "Proszę najmocniej 🫶",
+            "Dlaczego? 😢",
+            "No proszę cię 🥹",
+            "Moje serce pęka 💔",
+            "Na kolanach 🧎‍♀️",
+            "Proooszę 🙏",
+            "Nie mów tak 🥲",
+            "Tylko raz! 😇",
+            "Serio? 🫣",
+            "Nie mogę 🫠",
+            "Ostatni raz 🥴",
+            "Zlituj się 🥹",
+            "Nie mam słów 🥺",
+            "Ale dlaczego? 🥹",
+            "Ratunku! 😭",
+            "Czyli nic? 😢",
+            "Nie zostawiaj mnie tak 🥲",
+            "Serio tak? 😬"
+        ];
+
+        noButton.addEventListener('click', function() {
+            if (noClickCount < noResponses.length - 1) {
+                noClickCount++;
+                imageDisplay.src = imagePaths[noClickCount % imagePaths.length];
+                imageDisplay.style.display = 'block';
+
+                // Zwiększenie rozmiarów przycisku "Tak" (o 4%)
+                buttonHeight *= 1.04; // 4%
+                buttonWidth *= 1.04;  // 4%
+                fontSize *= 1.08;     // 8%
+                imageWidth *= 1.01;   // 1% dla GIFa
+                imageHeight *= 1.01;  // 1% dla GIFa
+
+                yesButton.style.height = `${buttonHeight}px`;
+                yesButton.style.width = `${buttonWidth}px`;
+                yesButton.style.fontSize = `${fontSize}px`;
+                imageDisplay.style.width = `${imageWidth}px`;
+                imageDisplay.style.height = `${imageHeight}px`;
+
+                noButton.textContent = noResponses[noClickCount];
+            } else {
+                noButton.textContent = noResponses[noClickCount];
+                imageDisplay.src = imagePaths[noClickCount % imagePaths.length];
+
+                // Zwiększenie rozmiarów przycisku "Tak"
+                buttonHeight *= 1.04; // 4%
+                buttonWidth *= 1.04;  // 4%
+                fontSize *= 1.08;     // 8%
+                imageWidth *= 1.01;   // 1% dla GIFa
+                imageHeight *= 1.01;  // 1% dla GIFa
+
+                yesButton.style.height = `${buttonHeight}px`;
+                yesButton.style.width = `${buttonWidth}px`;
+                yesButton.style.fontSize = `${fontSize}px`;
+                imageDisplay.style.width = `${imageWidth}px`;
+                imageDisplay.style.height = `${imageHeight}px`;
+            }
+        });
+
+        yesButton.addEventListener('click', () => {
+            valentineQuestion.textContent = "Jeeej!! :3";
+            responseButtons.style.display = 'none';
+            imageDisplay.src = './images/image7.gif';
+            imageDisplay.style.display = 'block';
+
+            // Dodajemy wiadomość "Dziękuję"
+            const thankYouMessage = document.createElement('div');
+            thankYouMessage.innerHTML = "Dziękuję, że zgodziłaś się być moją walentynką ❤️";
+            thankYouMessage.style.fontSize = '2rem';
+            thankYouMessage.style.color = '#e63946';
+            thankYouMessage.style.marginTop = '20px';
+            document.getElementById('container').appendChild(thankYouMessage);
+
+            confetti(); // Animacja confetti
+        });
+    </script>
+</body>
+</html>
